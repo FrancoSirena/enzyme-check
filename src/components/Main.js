@@ -1,13 +1,19 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
-export default props => {
+export default ({ myName }) => {
   const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setVisible(false);
+  }, myName);
 
   const handleChange = e => setVisible(e.target.checked);
 
   return (
     <div>
       <div>
+        <span>Hey {myName} i have something for you</span>
+        <br />
         <label htmlFor="wannaSee">I want to see it
         <input
           id="wannaSee"

@@ -14,4 +14,8 @@ describe("Main", () => {
     fireEvent.click(getByLabelText(/i want to see it/i));
     expect(getByAltText(/cute dogo/i)).toBeTruthy();
   });
+  test('It should reset state if user changes his name', () => {
+    const myName = 'Franco';
+    const { getByText } = render(<Main myName={myName} />)
+  })
 });

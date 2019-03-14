@@ -3,15 +3,23 @@ import React, { Component } from "react";
 export default class extends Component {
   state = { visible: false };
 
-  handleChange = e => {
-    this.setState({ visible: e.target.checked });
+  componentDidUpdate({ myName: prev }) {
+    if (prev !== this.props.myName) {
+      this.setState({ visible: false });
+    }
   }
 
+  handleChange = e => {
+    this.setState({ visible: e.target.checked });
+  };
+
   render() {
-    const { visible } = this.state;
+    const { visible } = this.state;
     return (
       <div>
         <div>
+          <span>Hey {this.props.myName} i have something for you</span>
+          <br />
           <label htmlFor="wannaSee">I want to see it</label>
           <input
             name="wannaSee"
