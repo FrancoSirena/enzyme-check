@@ -5,12 +5,16 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "@babel/register": "^7.0.0",
     "chai": "4.2.0",
     "enzyme": "3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
+    "jsdom-global": "^3.0.2",
     "mocha": "6.0.2",
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-scripts": "2.0.3",
+    "react-testing-library": "^6.0.0",
     "sinon": "7.2.7"
   },
   "devDependencies": {},
@@ -19,7 +23,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "mocha": "mocha src/**/*.test.js"
+    "mocha": "mocha -r @babel/register -r jsdom-global/register \"src/**/mocha/**/*.testMocha.js\" setupTest.js"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

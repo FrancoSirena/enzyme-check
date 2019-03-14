@@ -1,22 +1,17 @@
 import React from "react";
-import { mount } from "enzyme";
-import { expect } from "chai";
-
+import { cleanup, render, fireEvent } from "react-testing-library";
 import Main from "../Main";
 
 describe("Main", () => {
-  it("Should have an input with a label to the user", () => {
-    const wrapper = mount(<Main />);
-    expect(wrapper.find('input[type="checkbox]')).to.have.length(1);
-    expect(wrapper.find("label").text()).to.equal("I want to see it");
+  afterEach(cleanup);
+  test("It should render a checkbox with a label associated", () => {
+    const { getByLabelText } = render(<Main />);
+    const component = getByLabelText(/i want to see it/i);
+    expect(component.type).toBe("checkbox");
   });
-  it("Should see a beatiful dogo if input is checked", () => {
-    const wrapper = mount(<Main />);
-    wrapper.find('input[type="checkbox"').simulate({
-      target: {
-        checked: true
-      }
-    });
-    expect(wrapper.find("img")).to.have.length(1);
+  test("It should show a cute dogo pic if user wants to", () => {
+    const { getByAltText, getByLabelText } = render(<Main />);
+    fireEvent.click(getByLabelText(/i want to see it/i));
+    expect(getByAltText(/cute dogo/i)).toBeTruthy();
   });
 });
