@@ -17,7 +17,7 @@ describe("Main", () => {
   });
   test("It should reset state if user changes his name", () => {
     let myName = "Franco";
-    const { getByText, rerender, getByAltText, getByLabelText } = render(
+    const { queryByAltText, getByText, rerender, getByAltText, getByLabelText } = render(
       <Main myName={myName} />
     );
     let component = getByLabelText(/i want to see it/i);
@@ -25,6 +25,10 @@ describe("Main", () => {
     expect(getByAltText(/cute dogo/i)).toBeTruthy();
     myName = "Other name";
     rerender(<Main myName={myName} />);
+
+    getByText(/other name/i);
+
     component = getByLabelText(/i want to see it/i);
+    expect(queryByAltText(/cute dogo/i)).toBeFalsy();
   });
 });

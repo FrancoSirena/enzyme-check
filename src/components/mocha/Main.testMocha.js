@@ -19,4 +19,25 @@ describe("Main", () => {
     });
     expect(wrapper.find("img")).to.have.length(1);
   });
+  it('Should reset state after name has changed', () => {
+    let myName = 'franco';
+    const wrapper = mount(<Main myName={myName}/>);
+    expect(wrapper.find('span').text()).to.contain(myName);
+    wrapper.find('input[type="checkbox"]').simulate('change', {
+      target: {
+        checked: true
+      }
+    });
+    expect(wrapper.find("img")).to.have.length(1);
+
+    wrapper.setProps({
+      myName: 'other'
+    });
+
+    wrapper.update();
+
+    expect(wrapper.find('span').text()).to.contain('other');
+    expect(wrapper.find("img")).to.have.length(0);
+    
+  })
 });
