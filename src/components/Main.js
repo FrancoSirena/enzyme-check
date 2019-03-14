@@ -3,9 +3,12 @@ import React, { useState, useEffect } from "react";
 export default ({ myName }) => {
   const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    setVisible(false);
-  }, myName);
+  useEffect(
+    () => {
+      setVisible(false);
+    },
+    [myName]
+  );
 
   const handleChange = e => setVisible(e.target.checked);
 
@@ -14,14 +17,15 @@ export default ({ myName }) => {
       <div>
         <span>Hey {myName} i have something for you</span>
         <br />
-        <label htmlFor="wannaSee">I want to see it
-        <input
-          id="wannaSee"
-          name="wannaSee"
-          type="checkbox"
-          checked={visible}
-          onChange={handleChange}
-        />
+        <label htmlFor="wannaSee">
+          I want to see it
+          <input
+            id="wannaSee"
+            name="wannaSee"
+            type="checkbox"
+            checked={visible}
+            onChange={handleChange}
+          />
         </label>
       </div>
       {visible && (
